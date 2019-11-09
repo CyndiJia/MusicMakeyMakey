@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 //import logo from './logo.svg';
 import './App.css';
+import MIDISounds from 'midi-sounds-react';
 
 
-//C Major: CEG; D Major: DFshA G Major: GBD A Major: ACshE
 let Keys = [
   {
     id: 'white',
@@ -128,12 +128,18 @@ let Keys = [
 ]
 
 function App() {
+  let midiSounds;
+  function playTestInstrument(){
+    midiSounds.playChordNow(3, [60], 2.5);
+  } 
   return (
     <div className="App">
       <Keyboard data={Keys} />
+      <p><button onClick={playTestInstrument}>Play</button></p>
+      <MIDISounds ref={midiSounds} appElementName="root" instruments={[1]} />	
     </div>
   );
-}
+  }
 
 function Keyboard({ data }) {
   const [note,setNote] = useState('');
@@ -150,7 +156,6 @@ function Keyboard({ data }) {
   }
 
   function back() {
-    //setPressed(false);
     setMajor('');
     setNote('');
   }
@@ -187,6 +192,10 @@ function Keyboard({ data }) {
 
 
 function Key({ id, keyPressed, major,noteEntered }) {
+  // function play(event){
+  //   event.target.midiSounds.playChordNow(3, [60], 2.5);
+  // }
+  // <MIDISounds ref={(ref) => (this.midiSounds = ref)} appElementName="root" instruments={[3]} />
   return <div id={id} major={major} className={(keyPressed ? "pressed" : "") + " "+(noteEntered ? 'note':"")}></div>
 
 }
