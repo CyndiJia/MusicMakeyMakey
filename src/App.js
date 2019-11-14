@@ -152,27 +152,20 @@ let Keys = [
 ]
 
 function App() {
-  const [midiSounds,setMidi] = useState();
-  function playTestInstrument(){
-    // midiSounds.playChordNow(3, [60], 2.5);
-  } 
+  const [midiSounds,setMidi]=useState();
   return (
     <div className="App">
       <Keyboard data={Keys} setMidi={setMidi} midiSounds={midiSounds}/>
-      {/* <p><button onClick={playTestInstrument}>Play</button></p> */}
       <MIDISounds ref={setMidi} appElementName="root" instruments={[1]} />	
     </div>
   );
-  }
+}
 
 function Keyboard({ data,setMidi,midiSounds }) {
   const pairs = {"c":60,"d":62,"e":64,"f":65,"g":67,"a":69,"b":71};
-
+ 
   const [note,setNote] = useState('');
   const [majorSelected,setMajor] = useState('');
-  // const [midiSounds,setMidi]=useState();
-  // <MIDISounds ref={setMidi} instruments={[1]} />
-  
   
   function CMajor() {
     setMajor('CEG');
